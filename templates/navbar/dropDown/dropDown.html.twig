@@ -1,0 +1,20 @@
+<div class="drop-down">
+    <div class="drop-down__cards-declared-computer">
+        {% if '/game/' in currentPath %}
+            {% include "navbar/dropDown/elements/cardsDeclaredComputerNarrowScreen.html.twig" %}
+        {% endif %}
+    </div>
+    <div class="drop-down__trick">
+        {% if '/game/' in currentPath %}
+            <div>
+                {% include "navbar/dropDown/elements/narrowScreenTrick.html.twig" %}
+            </div>
+        {% endif %}
+    </div>
+    <div class="drop-down__menu-burger">
+        <div></div>
+        <div class="drop-down__menu-burger-box">
+            {% include "navbar/dropDown/elements/menuBurger.html.twig" %}
+        </div>
+    </div>
+</div>

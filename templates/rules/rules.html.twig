@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Règles du jeu{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/rules/rules.css">
+{% endblock %}
+
+{% block body %}
+    
+    <h1 class="rules-main-header">LES REGLES DU JEU</h1>
+    {% include "rules/introduction/introduction.html.twig" %}
+    {% include "rules/howToPlay/howToPlay.html.twig" %}
+    {% include "rules/end/end.html.twig" %}
+    
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbarEndRound.js"></script>
+        <script src="/scripts/stackDeclarePlayer.js"></script>
+        <script src="/scripts/flashMessage.js"></script>
+    {% endblock %}
+
+{% endblock %}
+
+
+
+
+
+
+
+
+
+
+
+

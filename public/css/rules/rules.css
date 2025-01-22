@@ -1,0 +1,38 @@
+.rules-main-header {
+    text-align: center;
+}
+.rules__header {
+    margin: 50px 0 auto 0;
+    text-decoration: underline;
+    font-weight: bold;
+}
+.rules__element {
+    margin: 10px 5%;
+    background-color: rgb(136, 172, 192);
+    padding: 10px;
+}
+.rules__paragraph {
+    margin: 0 auto;
+}
+.rules__paragraph-header {
+    text-decoration: underline;
+    font-weight: bold;
+}
+.rules__h3 {
+    margin: 10px 0;
+}
+.rules__end {
+    margin: 10px 0;
+}
+.endbar {
+    min-height: 40px;
+    background-color: rgb(0, 0, 0);
+    z-index: 1;
+    width: 100%;
+}
+
+@media screen and (max-width: 800px){
+    .rules__element {
+        border-radius: 3%;
+    }
+}

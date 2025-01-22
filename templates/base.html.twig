@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{% block title %}Jeu Bresin{% endblock %}</title>
+        <link rel="stylesheet" href="/css/reset.css">
+        <link rel="stylesheet" href="/css/base/base.css">
+        <link rel="stylesheet" href="/css/navbar/navbar.css">
+        <link rel="stylesheet" href="/css/navbar/elements/narrow-screen.css">
+        <link rel="stylesheet" href="/css/navbar/elements/normal-screen.css">
+        <link rel="stylesheet" href="/css/navbar/elements/wide-screen.css">
+        <link rel="stylesheet" href="/css/base/drop-down.css">
+        <link rel="stylesheet" href="/css/base/menu-burger.css">
+        <link rel="stylesheet" href="/css/base/cardsDeclaredComputerNarrowScreen.css">
+        <link rel="stylesheet" href="/css/game/trick.css">
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('app') }}
+        {% endblock %}
+    </head>
+
+    {% set currentPath = path(app.request.attributes.get('_route'), app.request.attributes.get('_route_params')) %}
+
+    <body class="body">
+        {% include "navbar/navbar.html.twig" %}
+        {% include "navbar/dropDown/dropDown.html.twig" %}
+        <main class="main">
+            {# Add the code to show the flash messages . #}
+            {% for label, messages in app.flashes %}
+                <div class="flash flashAlert">
+                    <div class="alert alert-{{ label }}">
+                        {% for message in messages %}
+                            <p> {{ message |raw }}</p>
+                        {% endfor %}
+                    </div>
+                </div>
+            {% endfor %}
+
+            {% block body %}
+            {% endblock %}
+            
+        </main>
+        <div class="endbar"></div>
+
+        {% if '/game/' in currentPath == false or situation.trickPlayer|length + situation.trickComputer|length == 0 or situation.stack|length == 0 %}
+            <script src="/scripts/dropDownNavbar.js"></script>
+        {% else %}
+            <script src="/scripts/dropDownNavbarGame.js"></script>
+        {% endif %}
+        <script src="/scripts/flashMessage.js"></script>
+        <script src="/scripts/clearHistory.js"></script>
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('app') }}
+        {% endblock %}
+    </body>
+</html>

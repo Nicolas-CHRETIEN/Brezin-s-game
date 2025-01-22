@@ -1,0 +1,53 @@
+<div class="score-normal scoreNormal">
+    <div class="score-normal_result-box">
+        <div class="score-normal_cards-in-stack">
+            {% if situation.stack|length > 0 %}
+                <h2 class="score-normal_h2">Cartes dans le talon: </h2>
+                <h2 class="score-normal_h2">{{ situation.stack|length }}</h2>
+            {% elseif situation.handPlayer|length == 0 %}
+                <h2 class="score-normal_h2">Début de manche</h2>
+            {% else %}
+                <h2 class="score-normal_h2">Fin de partie</h2>
+            {% endif %}
+        </div>
+        <div class="score-normal_score">
+            <div class="score-normal_result score-normal_result-player">
+                <h3 class="score-normal_h3">Score joueur</h3>
+                <p class="score-normal_result_p">{{ situation.score.player1 }}</p>
+            </div>
+            <div class="score-normal_result score-normal_result-computer">
+                <h3 class="score-normal_h3">Score ordinateur</h3>
+                <p class="score-normal_result_p">{{ situation.score.player2 }}</p>
+            </div>
+        </div>
+    </div>
+    <div class="score-normal_declarations-container">
+        <div class="score-normal_declarations score-normal_declarations-hidden scoreNormalDeclarations">
+            <div class="score-normal_declarations-box">
+                <h2 class="score-normal_h2">Annonces joueur</h2>
+                <div class="score-normal_declarations_player">
+                    {% for declaration in situation.score.declarationsListP1 %}
+                        <div class="score-normal_declaration">
+                            <h4 class="score-normal_h4">{{ declaration.frenchName }}</h4>
+                            <p class="score-normal_declaration-gain">{{ declaration.gain }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+            <div class="score-normal_declarations-box">
+                <h2 class="score-normal_h2">Annonces ordinateur</h2>
+                <div class="score-normal_declarations_player">
+                    {% for declaration in situation.score.declarationsListP2 %}
+                        <div class="score-normal_declaration">
+                            <h4 class="score-normal_h4">{{ declaration.frenchName }}</h4>
+                            <p class="score-normal_declaration-gain">{{ declaration.gain }}</p>
+                        </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% block javascripts %}
+    <script src="/scripts/dropDownScore.js"></script>
+{% endblock %}

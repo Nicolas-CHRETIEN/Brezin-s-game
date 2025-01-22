@@ -1,0 +1,17 @@
+<div class="narrow-screen_trick">
+    {% if situation.trickPlayer|length + situation.trickComputer|length > 0 %}
+        <div class="trick-list-hidden trickList">
+            <div class="trick_list">
+                {% if situation.playFirst == 'player' %}
+                    {% set lastCard = attribute(situation.trickPlayer, (situation.trickPlayer|length - 1)) %}
+                    {% set secondLastCard = attribute(situation.trickPlayer, (situation.trickPlayer|length - 2)) %}
+                {% else %}
+                    {% set lastCard = attribute(situation.trickComputer, (situation.trickComputer|length - 1)) %}
+                    {% set secondLastCard = attribute(situation.trickComputer, (situation.trickComputer|length - 2)) %}
+                {% endif %}
+                <img src={{ lastCard.img }} alt="dernière carte ramassée" class="trick_last-card">
+                <img src={{ secondLastCard.img }} alt="avant-dernière carte ramassée" class="trick_last-card">
+            </div>
+        </div>
+    {% endif %}
+</div>

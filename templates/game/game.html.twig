@@ -1,0 +1,100 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/game/cardsDeclaredComputer.css">
+    <link rel="stylesheet" href="/css/game/cardsDeclaredPlayer.css">
+    <link rel="stylesheet" href="/css/game/cardsHandPlayer.css">
+    <link rel="stylesheet" href="/css/game/cardsPlayed.css">
+    <link rel="stylesheet" href="/css/game/scoreBowdlerized.css">
+    <link rel="stylesheet" href="/css/game/scoreNormal.css">
+    <link rel="stylesheet" href="/css/game/stack.css">
+    <link rel="stylesheet" href="/css/game/trick.css">
+    <link rel="stylesheet" href="/css/game/trump.css">
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/choice-difficulty.css">
+{% endblock %}
+
+{% block body %}
+    {% if situation.stage == 'declare' or situation.stage == 'draw'  %}
+        <div class="stack_full-screen"> {# On small screens, when stage is on "draw" or "declare", stack takes the full screen and everything else is hidden. #}
+            {% include "game/include/stack.html.twig" %}
+        </div>
+        <div class="game game_hidden"> {# The other stuffs are hidden on small screen, but are visible otherwise thanks to game-hidden's css. #}
+            <div class="main_table">
+                <div class="main_top-screen">
+                    {% include "game/include/scoreNormal.html.twig" %}
+                    {% include "game/include/scoreBowdlerized.html.twig" %}
+                    {% include "game/include/cardsPlayed.html.twig" %}
+                    {% include "game/include/stack.html.twig" %}
+                    {% include "game/include/trump.html.twig" %}
+                </div>
+                <div class="main_middle-screen">
+                    {% include "game/include/cardsDeclaredComputer.html.twig" %}
+                    {% include "game/include/trick.html.twig" %}
+                </div>
+                <div class="main_elements-player">
+                    {% include "game/include/cardsDeclaredPlayer.html.twig" %}
+                    {% include "game/include/cardsHandPlayer.html.twig" %}
+                </div>
+                {% if situation.stage == 'deal' %}
+                    <a href="{{ path('game_deal', {'id': situation.id}) }}" class="deal_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                        <h2 class="button deal_header">Distribuer</h2>
+                    </a>
+                {% endif %}
+            </div>
+        </div>
+    {% else %} {# When stage is not on declare or draw, everythig appears normaly, without need to be hidden with css. #}
+        <div class="game">
+            <div class="main_table">
+                <div class="main_top-screen">
+                    {% include "game/include/scoreNormal.html.twig" %}
+                    {% include "game/include/scoreBowdlerized.html.twig" %}
+                    {% include "game/include/cardsPlayed.html.twig" %}
+                    {% include "game/include/stack.html.twig" %}
+                    {% include "game/include/trump.html.twig" %}
+                </div>
+                <div class="main_middle-screen">
+                    {% include "game/include/cardsDeclaredComputer.html.twig" %}
+                    {% include "game/include/trick.html.twig" %}
+                </div>
+                <div class="main_elements-player">
+                    {% include "game/include/cardsDeclaredPlayer.html.twig" %}
+                    {% include "game/include/cardsHandPlayer.html.twig" %}
+                </div>
+                {% if situation.stage == 'deal' %} {# Deal button appears only at he begining of a round, when stage is set on "deal". #}
+                    <a href="{{ path('game_deal', {'id': situation.id}) }}" class="deal_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                        <h2 class="button deal_header">Distribuer</h2>
+                    </a>
+                {% elseif situation.stage == 'choiceDifficulty' %} {# difficulty choice elements appear only at he begining of the game, when stage is set on "choiceDifficulty". #}
+                    <div class="game_difficulties">
+                        <h1 class="game_difficulty_header">Difficulté:</h1>
+                        <div class="game_difficulties-box">
+                            <a href="{{ path('game_difficulty', {'id': situation.id, 'difficulty': 'expert'}) }}" class="difficulty_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <h2 class="button-difficulty">expert</h2>
+                            </a>
+                            <a href="{{ path('game_difficulty', {'id': situation.id, 'difficulty': 'hard'}) }}" class="difficulty_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <h2 class="button-difficulty">Difficile</h2>
+                            </a>
+                            <a href="{{ path('game_difficulty', {'id': situation.id, 'difficulty': 'normal'}) }}" class="difficulty_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <h2 class="button-difficulty">Normal</h2>
+                            </a>
+                            <a href="{{ path('game_difficulty', {'id': situation.id, 'difficulty': 'easy'}) }}" class="difficulty_link stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <h2 class="button-difficulty">Facile</h2>
+                            </a>
+                        </div>
+                    </div>
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+
+    {% block javascripts %}
+        <script src="/scripts/stackDeclarePlayer.js"></script>
+        <script src="/scripts/flashMessage.js"></script>
+    {% endblock %}
+
+
+{% endblock %}
+        

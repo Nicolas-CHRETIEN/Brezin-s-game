@@ -1,0 +1,18 @@
+.evolution {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.evolution-graph {
+    background-color: rgb(255, 255, 255);
+}
+.evolution__header1 {
+    text-align: center;
+}
+
+@media screen and (max-width: 800px) {
+    .evolution-graph {
+        width: 100%;
+    }
+}

@@ -1,0 +1,64 @@
+<div class="menu-burger menu-burger-hidden menuBurger">
+    <ul class="menu-burger_list">
+
+        {% if '/home' in currentPath == false %}
+            <a href="{{ path('app_home') }}"  class="menu-burger_list-element home">
+                <p class="menu-burger_list-element-name">Accueil</p>
+            </a>
+        {% endif %}
+
+        {% if '/rules' in currentPath == false %}
+            <a href="{{ path('app_rules') }}" class="menu-burger_list-element rules-game">
+                <p class="menu-burger_list-element-name">Règles du jeu</p>
+            </a>
+        {% endif %}
+
+        {% if '/rules' in currentPath == false %}
+            <a href="{{ path('app_rules') }}" class="menu-burger_list-element narrow">
+                <p class="menu-burger_list-element-name">Règles</p>
+            </a>
+        {% endif %}
+
+        {% if app.user and '/MyAccount' in currentPath == false %}
+            <a href="{{ path('app_myAccount', {'id': app.user.id}) }}" class="menu-burger_list-element account" >
+            <p class="menu-burger_list-element-name">Mon compte</p>
+            </a>
+        {% endif %}
+
+        {% if app.user and '/MyAccount' in currentPath == false %}
+            <a href="{{ path('app_myAccount', {'id': app.user.id}) }}" class="menu-burger_list-element narrow" >
+                <p class="menu-burger_list-element-name">Compte</p>
+            </a>
+        {% endif %}
+
+        {% if '/knowMore' in currentPath == false and app.user is defined %}
+            <a href="{{ path('app_know_more') }}" class="menu-burger_list-element know-more">
+                <p class="menu-burger_list-element-name">En savoir plus</p>
+            </a>
+        {% elseif app.user is defined %}
+        {% else %}
+            <a href="{{ path('app_login') }}" class="menu-burger_list-element contact login">
+                <p class="menu-burger_list-element-name">Connexion</p>
+            </a>
+        {% endif %}
+
+        {% if '/knowMore' in currentPath == false %}
+            <a href="{{ path('app_know_more') }}" class="menu-burger_list-element narrow">
+                <p class="menu-burger_list-element-name">Plus</p>
+            </a>
+        {% endif %}
+
+        {% if '/contact' in currentPath == false %}
+            <a href="{{ path('app_contact') }}" class="menu-burger_list-element contact">
+                <p class="menu-burger_list-element-name">Contact</p>
+            </a>
+        {% endif %}
+
+        {% if app.user is defined %}
+            <a href="{{ path('app_logout') }}" class="menu-burger_list-element disconect">
+                <p class="menu-burger_list-element-name">Deconexion</p>
+            </a>
+        {% endif %}
+
+    </ul>
+</div>

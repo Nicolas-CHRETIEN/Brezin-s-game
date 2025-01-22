@@ -1,0 +1,95 @@
+.trick-list-hidden {
+    display: none;
+}
+.narrow-screen_trick {
+    align-self: center;
+    width: 60%;
+}
+.trick-list-visible {
+    border-color: rgb(0, 0, 0);
+    border-style: solid;
+    border-width: 2px;
+    background-color: rgb(255, 213, 159);
+    position: absolute;
+    z-index: 2;
+}
+.trick_list {
+    display: flex;
+    justify-content: space-around;
+}
+.trick_last-card {
+    margin: 3% 0;
+}
+.trick-list-active {
+    background-color: rgb(255, 213, 159);
+    color: rgb(0, 0, 0);
+}
+
+@media screen and (max-width: 800px) {
+    .trick_last-card {
+        width: 40%;
+    }
+    .trick_header,
+    .trick_img {
+        display: none;
+    }
+    .trick_list_visible {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .trick_last-card {
+        width: 20%;
+    }
+    .trick_header,
+    .trick_img {
+        display: none;
+    }
+    .trick_list_visible {
+        width: 60%;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .trick_header {
+        text-align: center;
+    }
+    .trick_img:hover {
+        cursor: pointer;
+    }
+    .trick-piles {
+        margin: auto 30px;
+        width: 15%;
+    }
+    .trick_h3 {
+        margin: 0;
+        position: absolute;
+        margin: 0 10px;
+    }
+    .trick-stock {
+        height: 190px;
+    }
+    .trick_list {
+        width: auto;
+        padding: 0;
+    }
+    .trick_last-card {
+        margin: 10px;
+    }
+    .trick_img {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .trick_img {
+        width: 100%;
+    }
+}
+
+@media screen and (min-width: 1601px){
+    .trick_img {
+        width: 100%;
+    }
+}

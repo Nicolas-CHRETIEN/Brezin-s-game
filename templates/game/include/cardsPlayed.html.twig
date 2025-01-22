@@ -1,0 +1,14 @@
+<div class="cards-played">
+    {% if situation.playerCardPlayed is null and situation.computerCardPlayed is null %}
+    {% else %}
+        <div class="cards-played_box">
+            <div class="cards-played_computer">
+                {% if situation.computerCardPlayed is null %}
+                {% else %}
+                    <h3 class="cards-played_h3">Carte ordinateur</h3>
+                    <img src={{ situation.computerCardPlayed.img }} alt={{ situation.computerCardPlayed.name }} class="cards-played_img card">
+                {% endif %}
+            </div>
+        </div>
+    {% endif %}
+</div>

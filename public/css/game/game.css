@@ -1,0 +1,181 @@
+.flash {
+    display: none;
+}
+.view {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+}
+.game {
+    background-color: rgb(90, 188, 118);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    align-self: center;
+    overflow: hidden;
+    height: calc(100vh - 80px);
+}
+.main_table {
+    height: calc(100vh - 80px);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: start;
+    width: 100%;
+}
+.main_game_screen {
+    display: flex;
+    justify-content:space-between;
+    width: 100%;
+}
+.stack_full-screen {
+    background-color: rgb(90, 188, 118);
+    min-height: calc(100vh - 80px);
+}
+.main_top-screen {
+    display: flex;
+    width: 100%;
+}
+.deal_link {
+    text-decoration: none;
+    min-width: 200px;
+    align-self: center;
+}
+.drop-down {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    height: 0px;
+}
+.button {
+    margin: 20px;
+    padding: 5%;
+    background-color: rgb(211, 0, 0);
+    border-radius: 40%;
+    color: rgb(255, 255, 255);
+    text-align: center;
+}
+
+
+@media screen and (max-width: 800px) {
+    .main_game_screen {
+        flex-direction: column;
+    }
+    .main_top-screen {
+        justify-content: space-between;
+    }
+    .main_hidden {
+        position: absolute;
+        visibility: hidden;
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .main_game_screen {
+        flex-direction: row;
+    }
+    .main_elements-player {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        height: 250px;
+    }
+    .main_top-screen {
+        height: 140px;
+        justify-content: space-around;
+    }
+    .game_hidden {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    .card {
+        width: 70px;
+    }
+    .main_elements-player {
+        height: 250px;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1200px) {
+    .card {
+        width: 70px;
+    }
+    .main_elements-player {
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .game {
+        max-width: 1500px;
+        min-width: 60%;
+    }
+    .main_game_screen {
+        flex-direction: row;
+    }
+    .main_top-screen {
+        justify-content: space-around;
+        margin: auto;
+        height: 160px;
+    }
+    .main_elements-player {
+        align-self: center;
+        display: flex;
+        flex-direction: column;
+        margin: auto;
+    }
+    .main_middle-screen {
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        margin: auto;
+        height: 200px;
+    }
+    .draw-allowed {
+        animation: hail 4s ease 0s infinite;
+        width: 90px;
+        height: 150px;
+        display: flex;
+    }
+    
+    .draw-allowed:hover {
+        cursor: pointer;
+        animation-play-state: paused;
+    }
+    
+    @keyframes hail {
+        0%{transform: rotate(-10deg);}
+        3%{transform: rotate(10deg);}
+        6%{transform: rotate(-10deg);}
+        9%{transform: rotate(10deg);}
+        12%{transform: rotate(-5deg);}
+        15%{transform: rotate(5deg);}
+        18%{transform: rotate(-5deg);}
+        21%{transform: rotate(2deg);}
+        23%{transform: rotate(-2deg);}
+        26%{transform: rotate(0deg);}
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .card {
+        width: 80px;
+    }
+    .main_elements-player {
+        height: 300px;
+    }
+}
+
+@media screen and (min-width: 1601px){
+    .card {
+        width: 110px;
+    }
+    .main_elements-player {
+        height: 350px;
+    }
+}

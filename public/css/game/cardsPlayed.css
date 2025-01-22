@@ -1,0 +1,57 @@
+.cards-played {
+    text-align: center;
+}
+.cards-played_box{
+    display: flex;
+    justify-content: space-between;
+}
+.cards-played_img {
+    width: 90%;
+}
+
+
+@media screen and (max-width: 800px){
+    .cards-played {
+        width: 20%;
+    }
+    .cards-played_h3 {
+        margin: 0;
+    }
+    .cards-played_computer > .image-card {
+        width: 50px;
+        height: 80px;
+    }
+}
+    
+
+@media screen and (min-width: 801px) and (max-width: 1200px){
+    .cards-played_computer {
+        height: 200px;
+    }
+    .cards-played {
+        width: 70px;
+        margin: 1%;
+    }
+    .cards-played_h3 {
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .cards-played_computer {
+        height: 250px;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .cards-played_img {
+        margin: auto 0;
+    }
+    .cards-played_h3 {
+        display: block;
+        margin: 0 0 20px 0;
+        font-weight: bold;
+    }
+}
+
+@media screen and (min-width: 1601px){}

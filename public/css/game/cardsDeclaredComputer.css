@@ -1,0 +1,81 @@
+@media screen and (max-width: 800px){
+    .cards-declared-computer {
+        position: absolute;
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .cards-declared-computer {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        margin-bottom: 5px;
+        height: 150px;
+        width: 100%;
+    }
+    .cards-declared-computer_header {
+        align-self: start;
+        margin: 0 0 0 20px;
+    }
+    .cards-declared-computer_cards {
+        display: flex;
+        justify-content: flex-start;
+        margin-left: 2%;
+    }
+    .main_middle-screen {
+        width: 100%;
+        padding: 20px;
+    }
+    .cards-declared-computer_card {
+        width: 95%;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    .cards-declared-computer_card-box {
+        width: 60px;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1200px) {
+    .cards-declared-computer_card-box {
+        width: 70px;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .cards-declared-computer_cards {
+        display: flex;
+        justify-content: flex-start;
+    }
+    .cards-declared-computer {
+        margin: auto 20px;
+        align-self: flex-start;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .cards-declared-computer {
+        height: 200px;
+    }
+    .cards-declared-computer_card-box {
+        width: 80px;
+    }
+    .cards-declared-computer_card {
+        width: 70px;
+    }
+}
+
+@media screen and (min-width: 1601px) {
+    .cards-declared-computer {
+        height: 210px;
+    }
+    .cards-declared-computer_card-box {
+        width: 100px;
+    }
+    .cards-declared-computer_card {
+        width: 90px;
+    }
+}
+

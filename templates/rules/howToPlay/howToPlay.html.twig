@@ -1,0 +1,9 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/rules/how-to-play/how-to-play.css">
+{% endblock %}
+<div class="rules__how-to-play">
+    <h3 class="rules__header">Comment jouer :</h3>
+    <p class="rules__paragraph">Il y a deux façons de marquer des points : tout au long de la partie en faisant une annonce et à la fin de la partie, en totalisant le nombre de 10 et d'as remportés dans les plis ramassés.</p>
+    <h3 class="rules__h3">Le jeu se décompose en 2 phases :</h3>
+    {% include "rules/howToPlay/steps/steps.html.twig" %}
+</div>

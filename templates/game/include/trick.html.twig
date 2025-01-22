@@ -1,0 +1,29 @@
+<div class="trick-piles">
+    {% if situation.trickPlayer|length + situation.trickComputer|length > 0 %}
+        <h3 class="trick_header">Plis</h3>
+        <div class="trick-stock LastTrickDesktop">
+            {% if situation.trickPlayer|length + situation.trickComputer|length > 12 %}
+                <img src="/images/svg/trick12.svg" alt="plis" class="trick_img">
+            {% else %}
+                <img src={{ "/images/svg/trick" ~ (situation.trickPlayer|length + situation.trickComputer|length) ~ ".svg" }} alt="plis" class="trick_img">
+            {% endif %}
+        </div>
+        <div class="trick-list-hidden trickListDesktop">
+            <h3 class="trick_h3">Dernier pli</h3>
+            <ul class="trick_list">
+                {% if situation.playFirst == 'player' %}
+                    {% set lastCard = attribute(situation.trickPlayer, (situation.trickPlayer|length - 1)) %} {# attribute permit to reach an element in an array thank's to its index. Here I select the last card of the  player'strick.  #}
+                    {% set secondLastCard = attribute(situation.trickPlayer, (situation.trickPlayer|length - 2)) %} {# attribute permit to reach an element in an array thank's to its index. Here I select the second last card of the player's trick.  #}
+                {% else %}
+                    {% set lastCard = attribute(situation.trickComputer, (situation.trickComputer|length - 1)) %} {# attribute permit to reach an element in an array thank's to its index. Here I select the last card of the computer's trick.  #}
+                    {% set secondLastCard = attribute(situation.trickComputer, (situation.trickComputer|length - 2)) %} {# attribute permit to reach an element in an array thank's to its index. Here I select the second last card of the computer's trick.  #}
+                {% endif %}
+                <img src={{ lastCard.img }} alt="dernière carte ramassée" class="trick_last-card card">
+                <img src={{ secondLastCard.img }} alt="avant-dernière carte ramassée" class="trick_last-card card">
+            </ul>
+        </div>
+    {% endif %}
+    {% block javascripts %}
+        <script src="/scripts/dropLastTrickDesktop.js"></script>
+    {% endblock %}
+</div>

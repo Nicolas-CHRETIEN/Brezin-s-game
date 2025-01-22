@@ -1,0 +1,137 @@
+.unPlayable {
+    background-color: rgba(0, 0, 0, 0.701);
+    opacity: 50%;
+}
+
+@media screen and (max-width: 800px) {
+    .cards-hand-player {
+        width: 95%;
+        text-align: center;
+    }
+    .cards-hand-player_carousel {
+        display: flex;
+        margin: 2% 0%;
+        height: 300px;
+        width: 95vw;
+        overflow: hidden;
+        overflow-x: scroll;
+    }
+    .cards-hand-player_ribon {
+        display: flex;
+        position: relative;
+        left: 3%;
+        width: 400px;
+    }
+    .cards-hand-player_card-box {
+        width: 180px;
+    }
+    .cards-hand-player_card {
+        width: 60%;
+        min-width: 170px;
+    }
+    .cards-hand-player_stamp {
+        position: absolute;
+        font-size: 230%;
+        top: 50%;
+        color: rgb(255, 255, 255);
+        background-color: rgb(255, 0, 0);
+        width: 43%
+    }
+    .cards-hand-player_hidden {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .cards-hand-player_card-box_hidden {
+        display: none;
+
+    }
+    .cards-hand-player_card-hidden {
+        display: none;
+    }
+    .cards-hand-player {
+        width: 100%;
+        text-align: center;
+        align-self: center;
+    }
+    .cards-hand-player_carousel {
+        margin: 0;
+    }
+    .cards-hand-player_ribon {
+        display: flex;
+        justify-content: center;
+        width: 100%;
+    }
+    .cards-hand-player_header {
+        margin: 0;
+    }
+    .cards-hand-player_card-box {
+        position: relative;
+    }
+    .cards-hand-player_card {
+        position: absolute;
+        z-index: 0;
+        right: 0%;
+    }
+    
+}
+
+@media screen and (min-width: 801px) and (max-width: 1000px) {
+    .cards-hand-player_card-box {
+        width: 80px;
+    }
+    .cards-hand-player_hidden {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1200px) {
+    .cards-hand-player_card-box {
+        width: 80px;
+    }
+    .cards-hand-player_hidden {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .cards-hand-player {
+        height: 80px;
+    }
+    .cards-hand-player_card:hover {
+        transform: translateY(-90px) scale(180%);
+        z-index: 1;
+    }
+    .unPlayable:hover {
+        transform: none;
+    }
+    .cards-hand-player_hidden {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1201px) {
+    .cards-hand-player_card-hidden {
+        display: none;
+    }
+    .cards-hand-player_card:hover {
+        transform: translateY(-110px) scale(180%);
+        z-index: 1;
+    }
+    .cards-hand-player {
+        margin: auto;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    .cards-hand-player_card-box {
+        width: 100px;
+    }
+}
+
+@media screen and (min-width: 1601px){
+    .cards-hand-player_card-box {
+        width: 130px;
+    }
+}

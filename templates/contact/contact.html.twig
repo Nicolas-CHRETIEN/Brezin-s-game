@@ -1,0 +1,17 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page de contact{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/contact/contact.css">
+{% endblock %}
+
+{% block body %}
+    <h1 class="contact__header">Contact</h1>
+    <div class="contact__div">
+        <p class="contact__paragraph">Une idée pour améliorer le jeu?</p>
+        <p class="contact__paragraph">Une critique?</p>
+        <p class="contact__paragraph">N'hésitez pas à contacter le créateur du jeu à l'adresse suivante:</p>
+        <a href="mailto:name@email.com" class="contact__email">developpeur-brezin@gmail.com</a>
+    </div>
+{% endblock %}

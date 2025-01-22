@@ -1,0 +1,74 @@
+.score-normal {
+    width: 300px;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+}
+.score-normal:hover {
+    cursor: pointer;
+}
+.score-normal_result-box {
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    background-color: rgb(255, 211, 157);
+    padding: 8px;
+    height: 110px;
+}
+.score-normal_cards-in-stack,
+.score-normal_result {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.score-normal_cards-in-stack {
+    margin: 5% 0;
+}
+.score-normal_result {
+    height: 25px;
+}
+.score-normal_declarations-container {
+    height: 0;
+}
+.score-normal_declarations {
+    background-color: rgb(253, 228, 196);
+    border-style: solid;
+    border-width: 2px;
+    border-color: rgb(0, 0, 0);
+    position: absolute;
+    width: 280px;
+    padding: 1%;
+}
+.score-normal_declarations-hidden {
+    display: none;
+}
+.score-normal_h2,
+.score-normal_h3,
+.score-normal_h4,
+.score-normal_declaration-gain {
+    margin: 0;
+}
+.score-normal_declaration {
+    display: flex;
+    justify-content: space-between;
+}
+@media screen and (max-width: 800px){
+    .score-normal {
+        position: absolute;
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .score-normal {
+        margin: 15px;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .score-normal {
+        padding: auto;
+        margin: auto 0;
+        height: 250px;
+    }
+}

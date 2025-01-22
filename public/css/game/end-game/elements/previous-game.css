@@ -1,0 +1,25 @@
+.previous-games {
+    align-self: self-start;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    width: 100%;
+    position: relative;
+    height: 60vh;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+.previous-games__game {
+    margin: 5px 0 2px 0;
+    position: relative;
+}
+.previous-games__success {
+    color: rgb(0, 156, 39);
+}
+.previous-games__failure {
+    color: rgb(180, 3, 3);
+}
+.previous-games__game:hover {
+    cursor: pointer;
+    text-decoration: underline;
+}

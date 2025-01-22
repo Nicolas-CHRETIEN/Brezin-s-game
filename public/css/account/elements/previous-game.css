@@ -1,0 +1,16 @@
+.previous-game {
+    margin-top: 80px;
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    font-size: smaller;
+}
+.previous-game__success {
+    color: rgb(29, 219, 60);
+}
+.previous-game__failure {
+    color: rgb(233, 27, 27);
+}
+.previous-game__link {
+    text-align: center;
+}

@@ -1,0 +1,14 @@
+.steps__cards {
+    display: flex;
+    justify-content: space-around;
+    margin-top: 10px;
+}
+.steps__card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+.steps__cards-img {
+    min-width: 30px;
+    width: 50%;
+}

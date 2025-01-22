@@ -1,0 +1,69 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu fin de la manche{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/end-round.css">
+{% endblock %}
+
+{% block body %}
+    
+    <div class="end-round_score-part">
+        <div class="end-round_score-player">
+            <h2 class="end-round_declarations endRoundDeclarationsPlayer">Annonces joueur</h2>
+            <div class="end-round_declarations-list end-round_declarations-list_hidden endRoundDeclarationsListPlayer">
+                {% for declaration in  situation.score.declarationsListP1 %}
+                    <div class="end-round_declaration">
+                        <p class="div end-round_declaration_element">{{ declaration.frenchName }}</p>
+                        <p class="end-round_declaration-gain">{{ declaration.gain }}</p>
+                    </div>
+                {% endfor %}
+                <div class="div end-round_declaration">
+                    <p class="div end-rounde_declaration_element">Nombre de 10 et d'as:</p>
+                    <p class="end-round_declaration-gain">{{ scoreTrick.player }}</p>
+                </div>
+            </div>
+            <div class="end-round_score-player-box">
+                <h2 class="end-round_player">Joueur</h2>
+                <h2 class="end-round_score">{{ situation.score.player1 }}</h2>
+            </div>
+        </div>
+        <div class="end-round_score-player">
+            <h2 class="end-round_declarations endRoundDeclarationsComputer">Annonces ordinateur</h2>
+            <div class="end-round_declarations-list endRoundDeclarationsListComputer end-round_declarations-list_hidden">
+                {% for declaration in  situation.score.declarationsListP2 %}
+                    <div class="div end-round_declaration">
+                        <p class="div end-round_declaration_element">{{ declaration.frenchName }}</p>
+                        <p class="end-round_declaration-gain">{{ declaration.gain }}</p>
+                    </div>
+                {% endfor %}
+                <div class="div end-round_declaration">
+                    <p class="div end-round_declaration_element">Nombre de 10 et d'as:</p>
+                    <p class="end-round_declaration-gain">{{ scoreTrick.computer }}</p>
+                </div>
+            </div>
+            <div class="end-round_score-player-box">
+                <h2 class="end-round_player">Ordinateur</h2>
+                <h2 class="end-round_score">{{ situation.score.player2 }}</h2>
+            </div>
+        </div>
+    </div>
+    {% if situation.score.player1 > 1000 or situation.score.player2 > 1000 %}
+        {% if situation.score.player1 > situation.score.player2 %}
+            <h2 class="end-round_result end-round_player-wins">Félicitation! Vous remportez la partie!</h2>
+        {% else %}
+            <h2 class="end-round_result end-round_computer-wins">L'ordinateur remporte la partie.</h2>
+        {% endif %}
+        <a href="{{ path('game_restart', {'id': situation.id}) }}" class="button end-game_restart stopHistoryRegister">Nouvelle partie</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% else %}
+        <h2 class="end-round_result end-round_player-wins">Il vous manque {{ 1000 - situation.score.player1 }} points pour remporter la partie.</h2>
+        <a href="{{ path('game_new_round', {'id': situation.id}) }}" class="button end-round_restart stopHistoryRegister">Manche suivante</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% endif %}
+    
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbarEndRound.js"></script>
+        <script src="/scripts/endRoundDropDown.js"></script>
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,10 @@
+<div class="cards-declared-computer-narrow-screen cards-declared-computer-narrow-screen-hidden cardsDeclaredComputerNarrowScreen">
+    <h2 class="cards-declared-computer-narrow-screen_header">Cartes annoncées par l'ordinateur</h2>
+    <div class="cards-declared-computer-narrow-screen_cards">
+        {% for card in situation.handComputer %}
+            {% if card.declared is defined %}
+                <img src={{ card.img }} alt={{ card.name }} class="cards-declared-computer-narrow-screen_card card">
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

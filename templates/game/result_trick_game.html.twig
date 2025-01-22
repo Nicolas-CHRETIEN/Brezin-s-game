@@ -1,0 +1,40 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu Résultat du jeu du pli{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/result-trick-game.css">
+{% endblock %}
+
+{% block body %}
+    {% if situation.playFirst == 'player' %}
+        <h2 class="result-trick-game_h2">Vous remportez le pli</h2>
+    {% else %}
+        <h2 class="result-trick-game_h2">L'ordinateur remporte le pli</h2>
+    {% endif %}
+    <div class="result-trick-game_cards">
+        <div class="result-trick-game_card">
+            <h3 class="result-trick-game_h3">Joueur</h3>
+            <img src={{ situation.playerCardPlayed.img }} alt={{ situation.playerCardPlayed.name }} class="result-trick-game_img">
+        </div>
+        <div class="result-trick-game_card">
+            <h3 class="result-trick-game_h3">Ordinateur</h3>
+            <img src={{ situation.computerCardPlayed.img }} alt={{ situation.computerCardPlayed.name }} class="result-trick-game_img">
+        </div>
+    </div>
+    {% if situation.handPlayer|length + situation.handPlayer|length == 0 %}
+        <a class="button result-trick-game_button stopHistoryRegister" href="{{ path('game_endRound', {'id': situation.id}) }}">OK</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% elseif situation.playFirst == 'player' %}
+        <a class="button result-trick-game_button stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': situation.id}) }}">OK</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% elseif situation.declarationsAvailableComputer|length > 0 and situation.stack|length > 0 %}
+        <a class="button result-trick-game_button stopHistoryRegister" href="{{ path('game_showDeclarationComputer', {'id': situation.id}) }}">OK</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% else %}
+        <a class="button result-trick-game_button stopHistoryRegister" href="{{ path('game_computerPlayFirst', {'id': situation.id}) }}">OK</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% endif %}
+    
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbar.js"></script>
+    {% endblock %}
+
+{% endblock %}

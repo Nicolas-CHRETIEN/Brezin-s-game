@@ -1,0 +1,35 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Page d'accueil{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/home/home.css">
+{% endblock %}
+
+{% block body %}
+
+    <h1 class="header">Le jeu du brézin</h1>
+    <div class="img-box">
+        <img src="/images/postcard.webp" alt="" class="img-box__img">
+    </div>
+    <div class="text-box">
+        <p class="text-box__paragraph">Le jeu du Brézin est un jeu ancien originaire du Berry.</p>
+        <p class="text-box__paragraph">Très répandu au 19ème siècle, il a été progressivement délaissé jusqu'à être quasiment oublié de nos jours.</p>
+        <p class="text-box__paragraph">Ses règles me sont parvenues grâce à mon grand père, originaire du Berry. Je souhaite avec ce site sauvegarder sa mémoire et permettre aux anciens Berrichons qui comme mon grand père, n'ont jamais oublié leurs origines, de continuer à y jouer.</p>
+
+        <a class="text-box__link" href="{{path('app_rules')}}"><p class="text-box__link-inside">Règles du jeu</p></a>
+        {% if app.user and app.user.situation %}
+            {% if app.user.situation.stage == 'trickGameResult' %}
+                <a class="text-box__link stopHistoryRegister" href="{{ path('game_playSecond', {'id': app.user.situation.id}) }}"><p class="text-box__link-inside">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% elseif app.user.situation.stage == 'showResultGame' and (app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) %}
+                <a class="text-box__link stopHistoryRegister" href="{{ path('game_endRound', {'id': app.user.situation.id}) }}"><p class="text-box__link-inside">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% elseif app.user.situation.stage == 'showResultGame' and ((app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) == false) %}
+                <a class="text-box__link stopHistoryRegister" href="{{ path('game_restart', {'id': app.user.situation.id}) }}"><p class="text-box__link-inside">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% else %}
+                <a class="text-box__link stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': app.user.situation.id}) }}"><p class="text-box__link-inside">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% endif %}
+        {% else %}
+             <a class="text-box__link stopHistoryRegister" href="{{ path('game_init') }}"><p class="text-box__link-inside">Jouer</p></a>
+        {% endif %}
+    </div>
+{% endblock %}

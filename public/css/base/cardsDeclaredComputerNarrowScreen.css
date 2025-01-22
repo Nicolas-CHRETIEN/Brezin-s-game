@@ -1,0 +1,42 @@
+.cards-declared-computer-narrow-screen-hidden {
+    position: absolute;
+    visibility: hidden;
+}
+.cards-declared-computer-narrow-screen_visible {
+    position: absolute;
+}
+.cards-declared-computer-narrow-screen {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    background-color: rgb(255, 213, 159);
+    text-align: center;
+    width: 100%;
+    z-index: 5;
+    position: absolute;
+}
+.cards-declared-computer-narrow-screen_cards {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    margin-bottom: 1%;
+}
+
+@media screen and (max-width: 800px) {
+    .cards-declared-computer-narrow-screen_card {
+        width: 20%;
+    }
+    .cards-declared-computer-narrow-screen_hidden {
+        position: absolute;
+        visibility: hidden;
+    }
+}
+
+@media screen and (min-width: 801px) {
+    .cards-declared-computer-narrow-screen_card {
+        width: 10%;
+    }
+}

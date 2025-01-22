@@ -1,0 +1,47 @@
+.trump {
+    min-width: 60px;
+    text-align: center;
+}
+.trump_header {
+    margin: 5px 0;
+}
+.trump_img {
+    width: 90%;
+}
+
+
+@media screen and (max-width: 800px){
+    .trump {
+        width: 62px;
+        margin: 1%;
+    }
+    .trump > .image-card {
+        width: 50px;
+        height: 80px;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px){
+    .trump {
+        width: 70px;
+        margin: 2%;
+    }
+    .image-card {
+        width: 90%;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .trump_img {
+        margin: auto 0;
+    }
+    .trump {
+        height: 200px;
+    }
+}
+
+@media screen and (min-width: 1201px) and (max-width: 1600px) {
+    
+}
+
+@media screen and (min-width: 1601px){}

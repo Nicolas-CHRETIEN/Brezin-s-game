@@ -1,0 +1,33 @@
+ {% extends 'base.html.twig' %}
+
+{% block title %}Jeu L'ordinateur annonce{% endblock %}
+
+
+{% block stylesheets %}
+    {{ encore_entry_link_tags('app') }}
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/declaration-computer.css">
+{% endblock %}
+
+{% block body %}
+    <h2 class="declaration-computer_h2">L'ordinateur annonce:</h2>
+    <div class="declaration-computer_declarations">
+        {% set declaration = attribute(situation.score.lastDeclaration, 0) %}
+        <h3 class="declaration-computer_h3">{{ declaration.frenchName }}</h3>
+        <div class="declaration-computer_cards-declaration">
+        {% for card in cardsDeclaration %}
+            <img src={{ card.img }} alt={{ card.name }} class="declaration-computer_img">
+        {% endfor %}
+    </div>
+    {% if situation.declarationsAvailableComputer|length < 1 or situation.score.alreadyDeclared is defined or declaration.name != "trump's seven" %}
+        <a href="{{ path('game_situation_continue', {'id': situation.id}) }}" class="declaration-computer_button stopHistoryRegister">Suivant</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% else %}
+        <a href="{{ path('game_showSecondDeclarationComputer', {'id': situation.id}) }}" class="declaration-computer_button stopHistoryRegister">Suivant</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    {% endif %}
+    
+    {% block javascripts %}
+    <script src="/scripts/dropDownNavbar.js"></script>
+        {# <script src="/scripts/clearHistory.js"></script> #}
+    {% endblock %}
+
+{% endblock %}

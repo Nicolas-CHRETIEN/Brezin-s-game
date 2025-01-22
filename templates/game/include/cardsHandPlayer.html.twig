@@ -1,0 +1,113 @@
+{# Below the code is repeated with some little differences:. #}
+{# When stage is on "play", cards shall contain links to play them. They do not contain any when situation.stage is not on 'play'. #}
+{# When player plays first, the link refer to the game_playFirst's method. Otherwise the link shall call the game_playSecond's method. #}
+{% if situation.stage == 'play' and situation.playFirst == 'player' %}
+    <div class="cards-hand-player">
+        {% if situation.handPlayer|length > 0 %} {# The header shall be hidden at the begining before the cards have been dealt.#}
+            <h2 class="cards-hand-player_header">Cartes en main</h2>
+        {% endif %}
+        <div class="cards-hand-player_carousel">
+            <div class="cards-hand-player_ribon">
+                {% for index, card in situation.handPlayer %}
+                    {# In a small screen, the declared cards appeare in cards-hand-player instead of in declared cards player. #}
+                    {# The declared cards are hidden with css if the screen is large enought to show two differents places for player's cards. #}
+                    {% if card.declared is not defined %}
+                        {% set class = 'cards-hand-player_card-box stopHistoryRegister ' ~  'card-hand-player_' ~ index %} {# stopHistoryRegister is a js class for clearHistory.js.#}
+                        {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                            <div class="cards-hand-player_card-box cards-hand-player">
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            </div>
+                        {% else %}
+                            <a href="{{ path('game_playFirst', {'id': situation.id, 'cardNumber': card.number}) }}" class="{{ class }}"> {# these cards must be hidden in big sizes screens. #}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                            <div class="cards-hand-player_card-box cards-hand-player_hidden cards-hand-player_card-box_hidden">
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            </div>
+                        {% else %}
+                            <a href="{{ path('game_playFirst', {'id': situation.id, 'cardNumber': card.number}) }}" class="cards-hand-player_card-box cards-hand-player_card-hidden cards-hand-player_card-box_hidden stopHistoryRegister"> {# these cards must be hidden in big sizes screens. #} {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                                {% if situation.stack|length > 0 %}
+                                    <p class="cards-hand-player_stamp">annoncée</p>
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% elseif situation.stage == 'play' and situation.playFirst == 'computer' %}
+    <div class="cards-hand-player">
+        {% if situation.handPlayer|length > 0 %} {# The header shall be hidden at the begining before the cards have been dealt.#}
+            <h2 class="cards-hand-player_header">Cartes en main</h2>
+        {% endif %}
+        <div class="cards-hand-player_carousel">
+            <div class="cards-hand-player_ribon">
+                {% for index, card in situation.handPlayer %}
+                    {# In a small screen, the declared cards appeare in cards-hand-player instead of in declared cards player. #}
+                    {# The declared cards are hidden with css if the screen is large enought to show two differents places for player's cards. #}
+                    {% if card.declared is not defined or card.declared|length == 0 %}
+                        {% set class = 'cards-hand-player_card-box stopHistoryRegister ' ~  'card-hand-player_' ~ index %}{# stopHistoryRegister is a js class for clearHistory.js.#}
+                        {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                            <div class="cards-hand-player_card-box cards-hand-player">
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            </div>
+                        {% else %}
+                            <a href="{{ path('game_playSecond', {'id': situation.id, 'cardNumber': card.number}) }}" class="{{ class }}"> {# these cards must be hidden in big sizes screens. #}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                            </a>
+                        {% endif %}
+                    {% else %}
+                        {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                            <div class="cards-hand-player_card-box cards-hand-player_hidden cards-hand-player_card-box_hidden">
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            </div>
+                        {% else %}
+                            <a href="{{ path('game_playSecond', {'id': situation.id, 'cardNumber': card.number}) }}" class="cards-hand-player_card-box cards-hand-player_card-hidden cards-hand-player_card-box_hidden stopHistoryRegister"> {# these cards must be hidden in big sizes screens. #} {# stopHistoryRegister is a js class for clearHistory.js.#}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                                {% if situation.stack|length > 0 %}
+                                    <p class="cards-hand-player_stamp">annoncée</p>
+                                {% endif %}
+                            </a>
+                        {% endif %}
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% else %}
+    <div class="cards-hand-player cards-hand-player_hidden">
+        {% if situation.handPlayer|length > 0 %} {# The header shall be hidden at the begining before the cards have been dealt.#}
+            <h2 class="cards-hand-player_header">Cartes en main</h2>
+        {% endif %}
+        <div class="cards-hand-player_carousel">
+            <div class="cards-hand-player_ribon">
+                {% for card in situation.handPlayer %}
+                    {# In a small screen, the declared cards appeare in cards-hand-player instead of in declared cards player. #}
+                    {# The declared cards are hidden with css if the screen is large enought to show two differents places for player's cards. #}
+                    {% if card.declared is not defined %}
+                        <div class="cards-hand-player_card-box cards-hand-player">
+                            {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            {% else %}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                            {% endif %}
+                        </div>
+                    {% else %}
+                        <div class="cards-hand-player_card-box cards-hand-player_card-box_hidden">
+                            {% if card.unPlayable is defined and card.unPlayable == 1 %} {# unPlayable is an element added to the cards if they can't be played by the player at end game part. #}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card unPlayable card">
+                            {% else %}
+                                <img src={{ card.img }} alt={{ card.name }} class="cards-hand-player_card card">
+                            {% endif %}
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+{% endif %}

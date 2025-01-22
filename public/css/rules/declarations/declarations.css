@@ -1,0 +1,83 @@
+.steps__declaration {
+    margin: 40px 0;
+}
+.declaration__one-card {
+    width: 60px;
+    height: 100px;
+}
+.declaration__two-cards {
+    width: 100px;
+    height: 120px;
+}
+.declaration__four-cards {
+    width: 120px;
+    height: 120px;
+}
+.declaration__five-cards {
+    width: 150px;
+    height: 120px;
+}
+
+@media screen and (max-width: 500px) {
+    .steps__declaration {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+    }
+}
+
+@media screen and (min-width: 501px) {
+    .steps__declaration {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+        align-items: center;
+        justify-items: center;
+        flex-wrap: wrap;
+    }
+}
+
+@media screen and (min-width: 501px) and (max-width: 650px) {
+    .declaration__box {
+        width: 65%;
+    }
+}
+
+@media screen and (min-width: 651px) and (max-width: 800px) {
+    .declaration__box {
+        width: 70%;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 900px) {
+    .declaration__box {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 901px) and (max-width: 1000px) {
+    .declaration__box {
+        width: 75%;
+    }
+}
+
+@media screen and (min-width: 1001px) and (max-width: 1100px) {
+    .declaration__box {
+        width: 80%;
+    }
+}
+
+@media screen and (min-width: 1101px) {
+    .declaration__box {
+        width: 80%;
+    }
+}
+/* 
+@media screen and (min-width: 1301px) {
+    .declaration__box {
+        width: 90%;
+    }
+} */
+

@@ -1,0 +1,22 @@
+.main {
+    display: flex;
+    flex-direction: column;
+}
+.contact__header {
+    text-align: center;
+}
+.contact__div {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    margin: 5%;
+    margin: 10%;
+    padding: 15px;
+    background-color: rgb(136, 172, 192);
+}
+.contact__paragraph {
+    margin: 0;
+}
+.contact__email {
+    margin: 20px 0;
+}

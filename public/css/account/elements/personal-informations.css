@@ -1,0 +1,12 @@
+.personal-informations {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+.personal-informations__element {
+    padding: 2% 10%;
+}
+.personal-informations__img {
+    width: 25%;
+    padding: 2% 10%;
+}

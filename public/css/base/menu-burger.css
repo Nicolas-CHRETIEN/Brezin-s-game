@@ -1,0 +1,99 @@
+.menu-burger {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    border-style: solid;
+    border-color: rgb(0, 0, 0);
+    border-width: 2px;
+    background-color: rgb(255, 213, 159);
+    text-align: start;
+    width: 25%;
+    position: absolute;
+    z-index: 1;
+}
+.drop-down__menu-burger-box {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.menu-burger_list {
+    list-style: none;
+    width: 100%;
+    text-align: center;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+}
+.menu-burger_list-element {
+    padding: 0;
+    border-width: 2px;
+    border-style: solid;
+    border-color: rgb(255, 213, 159);
+    text-decoration: none;
+}
+.menu-burger_list-element:hover {
+    cursor: pointer;
+    background-color: rgb(255, 255, 255);
+    border-color: rgb(0, 0, 0);
+}
+.menu-burger_list-element-name {
+    text-align: start;
+    text-decoration: none;
+    color: black;
+    text-align: center;
+}
+.menu-burger-hidden {
+    position: absolute;
+    visibility: hidden;
+}
+.burger-active {
+    background-color: rgb(255, 213, 159);
+}
+
+@media screen and (max-width: 800px) {
+    .rules-game {
+        display: none;
+    }
+    .account {
+        display: none;
+    }
+    .know-more {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px) {
+    .menu-burger_list {
+        font-size: 150%;
+    }
+    .account {
+        display: none;
+    }
+    .rules-game {
+        display: none;
+    }
+    .login {
+        display: none;
+    }
+    .narrow {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .home {
+        display: none;
+    }
+    .rules-game {
+        display: none;
+    }
+    .account {
+        display: none;
+    }
+    .login {
+        display: none;
+    }
+    .narrow {
+        display: none;
+    }
+}

@@ -1,0 +1,35 @@
+{# The stack must be visible only if stage is on "draw" or "declare". #}
+{# If stage is set on "declare", the "Annoncer"'s button appears. #}
+{% if situation.stage == 'declare' or situation.stage == 'draw'  %}
+    <div class="stack">
+        <h2 class="stack_header">Pioche</h2>
+        <a class="stack_draw-possible stopHistoryRegister" href="{{ path('game_draw', {'id': situation.id}) }}"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            <div class="draw-allowed">
+                {% if situation.stack|length > 20 %}
+                    <img src="/images/svg/stack10.svg" alt="tas de la pioche" class="stack_img">
+                {% elseif situation.stack|length < 4 %}
+                    <img src="/images/svg/stack1.svg" alt="tas de la pioche" class="stack_img">
+                {% else %}
+                    <img src={{ "/images/svg/stack" ~ (situation.stack|length / 2)|round ~ ".svg" }} alt="tas de la pioche" class="stack_img">
+                {% endif %}
+            </div>
+        </a>
+        {% if situation.stage == 'declare' %}
+            <h3 class="button stack_declare-button stack_declare-button_visible stackDeclareButton">Annoncer</h3>
+            <div class="stack_declarations">
+                <ul class="stack_declaration-list stack_declaration-list_hidden stackDeclarationList">
+                    {% for index, declaration in situation.declarationsAvailablePlayer %}
+                        <a href="{{ path('game_declare', {'id': situation.id, 'index': index}) }}" class="stack_lign-list stopHistoryRegister">{{ declaration.frenchName }}</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+    </div>
+{% else %}
+    <div class="stack stack_hidden">
+        <h2 class="stack_header">Pioche</h2>
+        {% for index, card in situation.stack %}
+            <img src="/images/svg/back.svg" alt="tas de la pioche" class="stack_img draw-allowed" style="translate({{ index }}px, -{{ index }}px);">
+        {% endfor %}
+    </div>
+{% endif %}

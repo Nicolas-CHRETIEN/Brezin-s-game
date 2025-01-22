@@ -1,0 +1,10 @@
+.how-to-play__steps {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    margin: 10px 0;
+}
+.how-to-play__step {
+    max-width: 600 px;
+}

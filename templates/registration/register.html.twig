@@ -1,0 +1,56 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/login/login.css">
+{% endblock %}
+
+{% block body %}
+    <div class="login_Menu">
+        <h1>Inscription</h1>
+        <div class="login_fields">
+            {{ form_start(registrationForm) }}
+                <div class="login_field">
+                    {{ form_row(registrationForm.email) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.plainPassword, {
+                        label: 'Mot de passe'
+                    }) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.agreeTerms, {
+                        label: 'Conditions d\'utilisation'
+                    }) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.firstname, {
+                        label: 'Prénom'
+                    }) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.lastname, {
+                        label: 'Nom de famille'
+                    }) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.introduction, {
+                        label: 'présentation'
+                    }) }}
+                </div>
+                <div class="login_field">
+                    {{ form_row(registrationForm.avatar, {
+                        label: 'URL de votre image de profil'
+                    }) }}
+                </div>
+                <button type="submit" class="login_submit">S'inscrire</button>
+            {{ form_end(registrationForm) }}
+        </div>
+    </div>
+
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbar.js"></script>
+    {% endblock %}
+    
+{% endblock %}

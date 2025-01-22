@@ -1,0 +1,88 @@
+<svg
+    class="evolution-graph"
+    height="200"
+    width="350"
+    viewBox="0 0 350 200"
+    xmlns="http://www.w3.org/2000/svg">
+    <path
+        fill="none"
+        stroke="black"
+        d="M 50, 180
+        L 50, 10
+        M 48, 140
+        L 52, 140
+        M 48, 100
+        L 52, 100
+        M 48, 60
+        L 52, 60
+        M 48, 20
+        L 52, 20
+        M 50, 180
+        L 350, 180
+        M 70, 178
+        L 70, 182
+        M 90, 178
+        L 90, 182
+        M 110, 178
+        L 110, 182
+        M 130, 178
+        L 130, 182
+        M 150, 178
+        L 150, 182
+        M 170, 178
+        L 170, 182
+        M 190, 178
+        L 190, 182
+        M 210, 178
+        L 210, 182
+        M 230, 178
+        L 230, 182
+        M 250, 178
+        L 250, 182
+        M 270, 178
+        L 270, 182
+        M 290, 178
+        L 290, 182
+        M 310, 178
+        L 310, 182
+        M 330, 178
+        L 330, 182"
+    />
+    <text text-anchor="end" x="45" y="140" font-size="10">Facile</text>
+    <text text-anchor="end" x="45" y="60" font-size="10">Difficile</text>
+    <text text-anchor="end" x="45" y="20" font-size="10">Expert</text>
+    <text text-anchor="end" x="45" y="100" font-size="10">Normal</text>
+    {% for index, game in evolution %}
+        {% set x = 50 + (index * 20) %}
+        {% if game.difficulty == "easy" %}
+            {% set y = 140 %}
+        {% elseif game.difficulty == "normal" %}
+            {% set y = 100 %}
+        {% elseif game.difficulty == "hard" %}
+            {% set y = 60 %}
+        {% else %}
+            {% set y = 20 %}
+        {% endif %}
+        {% if index == 0 %}
+            {% set oldX = x %}
+            {% set oldY = y %}
+        {% endif %}
+        <path
+            fill="none"
+            stroke="red"
+            d="M {{ oldX }}, {{ oldY }}
+            L {{ x }}, {{ y }}"
+        />
+        {% if game.winner == 'player' %}
+            <circle class="success" r="5" cx="{{ x }}" cy="{{ y }}" fill="rgb(156, 255, 161)"/>
+        {% else %}
+            <circle class="failure" r="5" cx="{{ x }}" cy="{{ y }}" fill="rgb(255, 150, 140)"/>
+        {% endif %}
+        {% set oldX = x %}
+        {% set oldY = y %}
+    {% endfor %}
+    <circle class="success" r="5" cx="90" cy="192" fill="rgb(156, 255, 161)"/>
+    <text text-anchor="start" x="100" y="195" font-size="10">Victoire</text>
+    <circle class="failure" r="5" cx="240" cy="192" fill="rgb(255, 150, 140)"/>
+    <text text-anchor="start" x="250" y="195" font-size="10">Défaite</text>
+</svg>

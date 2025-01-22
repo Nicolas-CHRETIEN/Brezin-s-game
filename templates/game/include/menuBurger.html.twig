@@ -1,0 +1,11 @@
+<div class="menu-burger menu-burger_hidden menuBurger">
+    <ul class="menu-burger_list">
+        <a href="{{ path('app_home') }}"  class="menu-burger_list_element home">Accueil</a>
+        <a href="{{ path('app_rules_save', {'id': situation.id}) }}" class="menu-burger_list_element rules-game">Règles du jeu</a>
+        <a class="menu-burger_list_element account" href="{{path('app_my_account')}}">Mon compte</a>
+        <li href="{{ path('app_home') }}" class="menu-burger_list_element know-more">En savoir plus</li>
+        <li href="{{ path('app_home') }}" class="menu-burger_list_element contact">Contact</li>
+        <a href="{{ path('game_restart', {'id': situation.id}) }}" class="menu-burger_list_element new-game stopHistoryRegister">Nouvelle partie</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+        <a href="{{path('app_logout')}}" class="menu-burger_list_element disconect">Deconexion</a>
+    </ul>
+</div>

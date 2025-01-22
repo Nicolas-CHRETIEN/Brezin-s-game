@@ -1,0 +1,39 @@
+.score-part {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    width: 100%;
+    margin: auto;
+}
+.score-part__declarations {
+    border-style: solid;
+    padding: 5px;
+    margin: 0;
+    background-color: rgb(213 121 0);
+    width: 230px;
+}.score-part__declarations:hover {
+    cursor: pointer;
+}
+.score-part__declarations-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    border-style: solid;
+    position: absolute;
+    padding: 5px;
+    background-color: rgb(213 121 0);
+    width: 230px;
+}
+.score-part__declarations-list_hidden{
+    display: none;
+}
+.score-part__declaration {
+    display: flex;
+    justify-content: space-between;
+    margin: 3px;
+}
+.score-part__score-player-box {
+    display: flex;
+    justify-content: space-between;
+    margin: auto;
+}

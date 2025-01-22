@@ -1,0 +1,69 @@
+{# accès aux données de la partie juste jouée via "situation" et à celles de toutes les parties jouées via "games" #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Résumé de la partie{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/menu-burger.css">
+    <link rel="stylesheet" href="/css/game/old-game/old-game.css">
+{% endblock %}
+
+{% block body %}
+    <div class="old-game old-game__hidden">
+        {% if game.winner == "player" %}
+            <h2 class="old-game__result">Vous avez remporté cette partie</h2>
+        {% else %}
+            <h2 class="old-game__result">Cette partie a été remportée par l'ordinateur</h2>
+        {% endif %}
+        <h3 class="old-game__date">{{ game.date|format_datetime(locale='fr', timezone='Europe/Paris') }}</h3>
+        {% if game.difficulty is defined %}
+            {% if game.difficulty == 'expert' %}
+                {% set frenchDifficulty = 'expert' %}
+            {% elseif game.difficulty == 'hard' %}
+                {% set frenchDifficulty = 'difficile' %}
+            {% elseif game.difficulty == 'normal' %}
+                {% set frenchDifficulty = 'normale' %}
+            {% elseif game.difficulty == 'easy' %}
+                {% set frenchDifficulty = 'facile' %}
+            {% else %}
+                {% set frenchDifficulty = 'non renseignée' %}
+            {% endif %}
+            <h2 class="old-game__rounds">Difficulté: {{ frenchDifficulty }}</h2>
+        {% endif %}
+        <h2 class="old-game__rounds">Nombre de manches: {{ game.roundsNumber }}</h2>
+        <div class="old-game__players">
+            <div class="old-game__player">
+                <h2 class="old-game__score">Score joueur: {{ game.scorePlayer }}</h2>
+                {% for declaration in attribute(game.declarationsMadePlayer, 0) %}
+                    <div class="old-game__declaration">
+                        <h3 class="old_game__declaration-name">{{ declaration.frenchName }}</h3>
+                        <h3 class="old_game__declaration-name">{{ declaration.gain }}</h3>
+                    </div>
+                {% endfor %}
+                <div class="old-game__declaration">
+                    <h3 class="old_game__declaration-name">10 et As</h3>
+                    <h3 class="old_game__declaration-name">{{ game.valuablesCardsInTricksPlayer }}</h3>
+                </div>
+            </div>
+            <div class="old-game__player">
+                <h2 class="old-game__score">Score ordinateur: {{ game.scoreComputer }}</h2>
+                {% for declaration in attribute(game.declarationsMadeComputer, 0) %}
+                    <div class="old-game__declaration">
+                        <h3 class="old-game__declaration_name">{{ declaration.frenchName }}</h3>
+                        <h3 class="old-game__declaration-name">{{ declaration.gain }}</h3>
+                    </div>
+                {% endfor %}
+                <div class="old-game__declaration">
+                    <h3 class="old-game__declaration-name">10 et As</h3>
+                    <h3 class="old-game__declaration-name">{{ game.valuablesCardsInTricksComputer }}</h3>
+                </div>
+            </div>
+        </div>
+        <a class="old-game__button stopHistoryRegister" href="{{ path('game_endRound', {'id': situation.id}) }}">OK</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+    </div>
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbar.js"></script>
+    {% endblock %}
+
+{% endblock %}

@@ -1,0 +1,120 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mon compte{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/account/my-account.css">
+    <link rel="stylesheet" href="/css/account/elements/personal-informations.css">
+    <link rel="stylesheet" href="/css/account/elements/score.css">
+    <link rel="stylesheet" href="/css/account/elements/evolution.css">
+    <link rel="stylesheet" href="/css/account/elements/previous-game.css">
+{% endblock %}
+
+{% block body %}
+    <h1 class="my-account__header">Mon compte</h1>
+    <div class="personal-informations">
+        <div class="personal-informations__column">
+            <p class="personal-informations__element"><span class="bold">Nom: <span/>{{ app.user.firstname }}</p>
+            <p class="personal-informations__element"><span class="bold">Prenom: <span/>{{ app.user.lastname }}</p>
+            <p class="personal-informations__element"><span class="bold">Email: <span/>{{ app.user.email }}</dpipv>
+            <p class="personal-informations__element"><span class="bold">Présentation: <span/>{{ app.user.introduction }}</p>
+        </div>
+        <div class="personal-informations__column">
+            <img src="{{ app.user.avatar }}" alt="image de profil" class="personal-informations__img">
+            <p class="personal-informations__element"><span class="bold">Role: <span/></p>
+            <div class="personal-informations__element"><span class="bold">Nombre de parties jouées: <span/>{{ app.user.gameID|length }}</div>
+            <div class="personal-informations__element"><span class="bold">Score: <span/>{{ app.user.grade }}</div>
+            <div class="personal-informations__element"><span class="bold">Classement: <span/>{{ app.user.ranking }}</div>
+        </div>
+    </div>
+    <div class="score">
+        <h2 class="score__header1">Parties gagnées</h2>
+        <div class="score__container">
+            {# Easy score's graph #}
+            <div class="score__easy score__graph">
+                <h3 class="score__header2">Facile</h3>
+                <h4 class="score__header3"><span class="bold">Parties jouées: <span/>{{ score.easy.number }}</h4> {# score is an array created on UsersController->myAccount() with needed informations. #}
+                <svg height="200" width="200" viewBox="0 0 20 20">
+                    <circle r="10" cx="10" cy="10" fill="rgb(255, 77, 77)" />
+                    <circle r="5" cx="10" cy="10" fill="transparent"
+                        stroke="rgb(90, 180, 87)"
+                        stroke-width="10"
+                        stroke-dasharray="calc({{score.easy.winningRate * 100}} * 31.4 / 100) 31.4"
+                        transform="rotate(-90) translate(-20)" 
+                    />
+                    <text text-anchor="end" x="19.9" y="1.5" font-size="2">{{ score.easy.winningRate * 100 }} %</text>
+                    <text text-anchor="start" x="0.1" y="1.5" font-size="2">{{ 100 - (score.easy.winningRate * 100) }} %</text>
+                </svg>
+            </div>
+            {# Normal score's graph #}
+            <div class="score__normal score__graph">
+                <h3 class="score__header2">Normal</h3>
+                <h4 class="score__header3"><span class="bold">Parties jouées: <span/>{{ score.normal.number }}</h4> {# score is an array created on UsersController->myAccount() with needed informations. #}
+                <svg height="200" width="200" viewBox="0 0 20 20">
+                    <circle r="10" cx="10" cy="10" fill="rgb(255, 77, 77)" />
+                    <circle r="5" cx="10" cy="10" fill="transparent"
+                        stroke="rgb(90, 180, 87)"
+                        stroke-width="10"
+                        stroke-dasharray="calc({{score.normal.winningRate * 100}} * 31.4 / 100) 31.4"
+                        transform="rotate(-90) translate(-20)" 
+                    />
+                    <text text-anchor="end" x="19.9" y="1.5" font-size="2">{{ score.normal.winningRate * 100 }} %</text>
+                    <text text-anchor="start" x="0.1" y="1.5" font-size="2">{{ 100 - (score.normal.winningRate * 100) }} %</text>
+                </svg>
+            </div>
+            {# Hard score's graph #}
+            <div class="score__hard score__graph">
+                <h3 class="score__header2">Difficile</h3>
+                <h4 class="score__header3"><span class="bold">Parties jouées: <span/>{{ score.hard.number }}</h4> {# score is an array created on UsersController->myAccount() with needed informations. #}
+                <svg height="200" width="200" viewBox="0 0 20 20">
+                    <circle r="10" cx="10" cy="10" fill="rgb(255, 77, 77)" />
+                    <circle r="5" cx="10" cy="10" fill="transparent"
+                        stroke="rgb(90, 180, 87)"
+                        stroke-width="10"
+                        stroke-dasharray="calc({{ score.hard.winningRate * 100 }} * 31.4 / 100) 31.4"
+                        transform="rotate(-90) translate(-20)" 
+                    />
+                    <text text-anchor="end" x="19.9" y="1.5" font-size="2">{{ score.hard.winningRate * 100 }} %</text>
+                    <text text-anchor="start" x="0.1" y="1.5" font-size="2">{{ 100 - (score.hard.winningRate * 100) }} %</text>
+                </svg>
+            </div>
+            {# Expert score's graph #}
+            <div class="score__expert score__graph">
+                <h3 class="score__header2">Expert</h3>
+                <h4 class="score__header3"><span class="bold">Parties jouées: <span/>{{ score.expert.number }}</h4> {# score is an array created on UsersController->myAccount() with needed informations. #}
+                <svg height="200" width="200" viewBox="0 0 20 20">
+                    <circle r="10" cx="10" cy="10" fill="rgb(255, 77, 77)" />
+                    <circle r="5" cx="10" cy="10" fill="transparent"
+                        stroke="rgb(90, 180, 87)"
+                        stroke-width="10"
+                        stroke-dasharray="calc({{score.expert.winningRate * 100}} * 31.4 / 100) 31.4"
+                        transform="rotate(-90) translate(-20)" 
+                    />
+                    <text text-anchor="end" x="19.9" y="1.5" font-size="2">{{ score.expert.winningRate * 100 }} %</text>
+                    <text text-anchor="start" x="0.1" y="1.5" font-size="2">{{ 100 - (score.expert.winningRate * 100) }} %</text>
+                </svg>
+            </div>
+        </div>
+    </div>
+    <div class="evolution">
+        <h2 class="evolution__header1">difficulté choisie</h2>
+        <div class="evolution__graph">
+            {% include "graph/evolution.html.twig" %}
+        </div>
+    </div>
+    <div class="previous-game">
+        {% for game in games %}
+            {% if game.winner == "player" %}
+                <a href="{{ path('game_show_resume', {'id': game.id, 'situation': app.user.situation.id}) }}" class="previous-game__link stopHistoryRegister"><h3 class="previous-game__game previous-game__success">Victoire {{ game.date|format_datetime(locale='fr', timezone='Europe/Paris') }}: {{ game.scorePlayer }} à {{ game.scoreComputer }} {{ game.difficulty }}</h3></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% else %}
+                <a href="{{ path('game_show_resume', {'id': game.id, 'situation': app.user.situation.id}) }}" class="previous-game__link stopHistoryRegister"><h3 class="previous-game__game previous-game__failure">Defaite {{ game.date|format_datetime(locale='fr', timezone='Europe/Paris') }}: {{ game.scorePlayer }} à {{ game.scoreComputer }} {{ game.difficulty }}</h3></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% endif %}
+        {% endfor %}
+    </div>
+    
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbarEndRound.js"></script>
+        <script src="/scripts/endGameDropDown.js"></script>
+    {% endblock %}
+
+{% endblock %}

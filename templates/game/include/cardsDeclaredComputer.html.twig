@@ -1,0 +1,14 @@
+<div class="cards-declared-computer cards-declared-computer_hidden cardsDeclaredComputer">
+    {% if situation.score.declarationsListP2|length > 0 and situation.stack|length > 0 %}
+        <h3 class="cards-declared-computer_header">Cartes annoncées par l'ordinateur</h3>
+    {% endif %}
+    <div class="cards-declared-computer_cards">
+        {% for card in situation.handComputer %}
+            {% if card.declared is defined %}
+                <div class="cards-declared-computer_card-box">
+                    <img src={{ card.img }} alt={{ card.name }} class="cards-declared-computer_card">
+                </div>
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

@@ -1,0 +1,83 @@
+{# accès aux données de la partie juste jouée via "situation" et à celles de toutes les parties jouées via "games" #}
+{% extends 'base.html.twig' %}
+
+{% block title %}Jeu Fin de la partie{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/game/game.css">
+    <link rel="stylesheet" href="/css/game/end-game/end-game.css">
+    <link rel="stylesheet" href="/css/game/end-game/elements/score-part.css">
+    <link rel="stylesheet" href="/css/game/end-game/elements/result.css">
+    <link rel="stylesheet" href="/css/game/end-game/elements/previous-game.css">
+{% endblock %}
+
+{% block body %}
+    <div class="end-game__score-part">
+        <div class="score-part__score-player">
+            <h2 class="score-part__declarations scorePartDeclarationsPlayer">Annonces joueur</h2>
+            <div class="score-part__declarations-list score-part__declarations-list_hidden scorePartDeclarationsListPlayer">
+                {% for declaration in  situation.score.declarationsListP1 %}
+                    <div class="score-part__declaration">
+                        <p class="div score-part__declaration-element">{{ declaration.frenchName }}</p>
+                        <p class="score-part__declaration-gain">{{ declaration.gain }}</p>
+                    </div>
+                {% endfor %}
+                <div class="div score-part__declaration">
+                    <p class="div score-part__declaration-element">Nombre de 10 et d'as:</p>
+                    <p class="score-part__declaration-gain">{{ scoreTrick.player }}</p>
+                </div>
+            </div>
+            <div class="score-part__score-player-box">
+                <h2 class="end-game_player">Joueur</h2>
+                <h2 class="end-game_score">{{ situation.score.player1 }}</h2>
+            </div>
+        </div>
+        <div class="score-part__score-player">
+            <h2 class="score-part__declarations scorePartDeclarationsComputer">Annonces ordinateur</h2>
+            <div class="score-part__declarations-list scorePartDeclarationsListComputer score-part__declarations-list_hidden">
+                {% for declaration in  situation.score.declarationsListP2 %}
+                    <div class="div score-part__declaration">
+                        <p class="div score-part__declaration-element">{{ declaration.frenchName }}</p>
+                        <p class="score-part__declaration-gain">{{ declaration.gain }}</p>
+                    </div>
+                {% endfor %}
+                <div class="div score-part__declaration">
+                    <p class="div score-part__declaration-element">Nombre de 10 et d'as:</p>
+                    <p class="score-part__declaration-gain">{{ scoreTrick.computer }}</p>
+                </div>
+            </div>
+            <div class="score-part__score-player-box">
+                <h2 class="score-part__player">Ordinateur</h2>
+                <h2 class="score-part__score">{{ situation.score.player2 }}</h2>
+            </div>
+        </div>
+    </div>
+    <div class="result">
+        {% if situation.score.player1 > 1000 or situation.score.player2 > 1000 %}
+            {% if situation.score.player1 > situation.score.player2 %}
+                <h2 class="result__message result__player-wins">Félicitation! Vous remportez la partie!</h2>
+            {% else %}
+                <h2 class="result__message result__computer-wins">L'ordinateur remporte la partie.</h2>
+            {% endif %}
+            <a href="{{ path('game_restart', {'id': situation.id}) }}" class="button result__restart stopHistoryRegister">Nouvelle partie</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+        {% else %}
+            <h2 class="result__message">Il vous manque {{ 1000 - situation.score.player1 }} points pour remporter la partie.</h2>
+            <a href="{{ path('game_new_round', {'id': situation.id}) }}" class="button result__restart stopHistoryRegister">Manche suivante</a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+        {% endif %}
+    </div>
+    <div class="previous-games">
+        {% for game in games %}
+            {% if game.winner == "player" %}
+                <a href="{{ path('game_show_resume', {'id': game.id, 'situation': situation.id}) }}" class="previous-games__link stopHistoryRegister"><h3 class="previous-games__game previous-games__success">Victoire {{ game.date|format_datetime(locale='fr', timezone='Europe/Paris') }}: {{ game.scorePlayer }} à {{ game.scoreComputer }}</h3></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% else %}
+                <a href="{{ path('game_show_resume', {'id': game.id, 'situation': situation.id}) }}" class="end-game_link stopHistoryRegister"><h3 class="previous-games__game previous-games__failure">Defaite {{ game.date|format_datetime(locale='fr', timezone='Europe/Paris') }}: {{ game.scorePlayer }} à {{ game.scoreComputer }}</h3></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+            {% endif %}
+        {% endfor %}
+    </div>
+
+    {% block javascripts %}
+        <script src="/scripts/dropDownNavbarEndRound.js"></script>
+        <script src="/scripts/endGameDropDown.js"></script>
+    {% endblock %}
+
+{% endblock %}

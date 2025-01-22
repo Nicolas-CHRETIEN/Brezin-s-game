@@ -1,0 +1,24 @@
+{% block stylesheets %}
+    <link rel="stylesheet" href="/css/rules/steps/steps.css">
+{% endblock %}
+<div class="how-to-play__steps">
+    <div class="how-to-play__step rules__element">
+        <h3 class="rules__header">1. Le jeu pour gagner le pli :</h3>
+        <p class="rules__paragraph">Le premier joueur pioche une carte dans le talon puis joue la 
+        carte de son choix. L'autre joueur, à son tour, fait la même 
+        chose. S'il joue dans la même couleur que son adversaire et si sa 
+        carte est plus forte, il ramasse le pli, si elle est moins forte, c'est 
+        l'adversaire qui remporte le pli. C'est celui qui remporte le pli 
+        qui rejoue en premier. </p>
+        <p class="rules__paragraph">Les cartes ayant été jouées sont retournées de manière à ne plus 
+        être visibles. Il y a un tas de plis par joueur, les cartes vont dans 
+        le tas du joueur qui a remporté le pli.</p>
+        <p class="rules__paragraph">S'il joue une couleur différente, peu importe la puissance de la 
+        carte, c'est l'adversaire qui remporte le pli, sauf s'il coupe, en 
+        jouant de l'atout, Dans ce dernier cas, c'est lui qui remporte le 
+        pli.</p>
+        <h3 class="rules__h3">La valeur des cartes est la suivante, du plus faible au plus fort :</h3>
+        {% include "rules/howToPlay/steps/cards/cards.html.twig" %}
+    </div>
+    {% include "rules/howToPlay/steps/declarations/declarations.html.twig" %}
+</div>

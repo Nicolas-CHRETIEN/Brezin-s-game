@@ -1,0 +1,38 @@
+@media screen and (max-width: 800px){
+    .score-bowdlerized {
+        margin: 2%;
+        width: 80px;
+        height: 100px;
+        border-style: solid;
+        border-width: 2px;
+        border-color: rgb(0, 0, 0);
+        background-color: rgb(255, 211, 157);
+        text-align: center;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+    }
+    .score-bowdlerized_header {
+        margin: 0;
+    }
+    .score-bowdlerized_player {
+        display: flex;
+        justify-content: space-around;
+    }
+    .score-bowdlerized_score,
+    .score-bowdlerized_turn {
+        margin: 0;
+    }
+}
+
+@media screen and (min-width: 801px) and (max-width: 1200px){
+    .score-bowdlerized {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1201px){
+    .score-bowdlerized {
+        display: none;
+    }
+}

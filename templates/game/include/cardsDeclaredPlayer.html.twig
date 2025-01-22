@@ -1,0 +1,24 @@
+<div class="cards-declared-player">
+    {% if situation.score.declarationsListP1|length > 0 and situation.stack|length > 0 %}
+        <h3 class="cards-declared-player_header">Cartes annoncées par le joueur</h3>
+    {% endif %}
+    <div class="cards-declared-player_cards-box">
+        {% for card in situation.handPlayer %}
+            {% if card.declared is defined %} {# Only the declared cards appear. The other are in the player's hand. #}
+                {% if situation.stage == 'play' and situation.playFirst == 'player' %} {# If stage == play, then the cards are linked to a route. The name of the route depends on who starts to play. #}
+                    <a href="{{ path('game_playFirst', {'id': situation.id, 'cardNumber': card.number}) }}" class="cards-declared-player_card-box stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                        <img src={{ card.img }} alt={{ card.name }} class="cards-declared-player_card card">
+                    </a>
+                {% elseif situation.stage == 'play' and situation.playFirst == 'computer' %} {# If stage == play, then the cards are linked to a route. The name of the route depends on who starts to play. #}
+                    <a href="{{ path('game_playSecond', {'id': situation.id, 'cardNumber': card.number}) }}" class="cards-declared-player_card-box stopHistoryRegister"> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                        <img src={{ card.img }} alt={{ card.name }} class="cards-declared-player_card card">
+                    </a>
+                {% else %} {# As stage != play, there is just the image of the card, without link to play them. #}
+                    <div class="cards-declared-player_card-box cards-declared-player_hidden">
+                        <img src={{ card.img }} alt={{ card.name }} class=" card">
+                    </div>
+                {% endif %}
+            {% endif %}
+        {% endfor %}
+    </div>
+</div>

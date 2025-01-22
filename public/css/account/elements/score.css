@@ -1,0 +1,22 @@
+.score {
+    margin-top: 80px;
+}
+.score__container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+.score__header1,
+.score__header2,
+.score__header3 {
+    text-align: center;
+}
+.bold {
+    font-weight: bold;
+}
+.score__graph {
+    background-color: rgb(255, 255, 255);
+    padding: 40px;
+    margin-bottom: 5%;
+}

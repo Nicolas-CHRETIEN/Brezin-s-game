@@ -1,0 +1,225 @@
+<nav class="navbar">
+	<div class="narrow-screen">
+        <ul class="narrow-screen__navbar-list">
+            {% if app.user and app.user.situation %}
+                {% if '/game/' in currentPath == false %}
+                    {% if app.user.situation.stage == 'trickGameResult' %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', {'id': app.user.situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and (app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', {'id': app.user.situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and ((app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) == false) %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_restart', {'id': app.user.situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': app.user.situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                    {% if '/rules' in currentPath == false %}
+                        <a class="narrow-screen__list-element" href="{{path('app_rules')}}"><p class="narrow-screen__inside-list-element">Règles</p></a>
+                    {% endif %}
+                {% else %}
+                    {% if app.user.situation.score.declarationsListP2|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="narrow-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="narrow-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if app.user.situation.trickPlayer|length + app.user.situation.trickComputer|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="narrow-screen__list-element LastTrick last-trick trick"><p class="narrow-screen__inside-list-element">Pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false %}
+                    <a class="narrow-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="narrow-screen__icon narrow-screen__inside-list-element"></a>
+                {% endif %}
+            {% elseif situation is defined %}
+                {% if '/game/' in currentPath == false %}
+                    {% if situation.stage == 'trickGameResult' %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', {'id': situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and (situation.score.player1|length < 1000 and situation.score.player2 < 1000) %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', {'id': situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and ((situation.score.player1|length < 1000 and situation.score.player2 < 1000) == false) %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_restart', {'id': situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': situation.id}) }}"><p class="narrow-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                {% else %}
+                    {% if situation.score is defined and situation.score.declarationsListP2|length > 0 and situation.stack|length > 0 %}
+                        <li class="narrow-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="narrow-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if situation.trickPlayer|length + situation.trickComputer|length > 0 and situation.stack|length > 0 %}
+                        <li class="narrow-screen__list-element LastTrick last-trick trick"><p class="narrow-screen__inside-list-element">Pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="narrow-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="narrow-screen__icon narrow-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="narrow-screen__list-element" href="{{path('app_login')}}"><p class="narrow-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% else %}
+                {% if app.user %}
+                    <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_user_init', {'id': app.user.id}) }}"><p class="narrow-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% else %}
+                    <a class="narrow-screen__list-element stopHistoryRegister" href="{{ path('game_init') }}"><p class="narrow-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="narrow-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="narrow-screen__icon narrow-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="narrow-screen__list-element" href="{{path('app_login')}}"><p class="narrow-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% endif %}
+            <div class="burger burgerGame narrow-screen__burger">
+                <span class="narrow-screen__top-bun narrow-screen__burger-part"></span>
+                <span class="narrow-screen__meat narrow-screen__burger-part"></span>
+                <span class="narrow-screen__bottom-bun narrow-screen__burger-part"></span>
+            </div>
+        </ul>
+	</div>
+	<div class="normal-screen">
+		<ul class="normal-screen__navbar-list">
+            {% if app.user and app.user.situation %}
+                {% if '/game/' in currentPath == false %}
+                    {% if app.user.situation.stage == 'trickGameResult' %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', {'id': app.user.situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and (app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', {'id': app.user.situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and ((app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) == false) %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_restart', {'id': app.user.situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': app.user.situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                {% else %}
+                    {% if app.user.situation.score.declarationsListP2|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="normal-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="normal-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if app.user.situation.trickPlayer|length + app.user.situation.trickComputer|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="normal-screen__list-element LastTrick last-trick trick"><p class="normal-screen__inside-list-element">Dernier pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="normal-screen__list-element" href="{{path('app_rules')}}"><p class="normal-screen__inside-list-element">Règles</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false %}
+                    <a class="normal-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="normal-screen__icon normal-screen__inside-list-element"></a>
+                {% endif %}
+            {% elseif situation is defined %}
+                {% if '/game/' in currentPath == false %}
+                    {% if situation.stage == 'trickGameResult' %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', {'id': situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and (situation.score.player1|length < 1000 and situation.score.player2 < 1000) %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', {'id': situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and ((situation.score.player1|length < 1000 and situation.score.player2 < 1000) == false) %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_restart', {'id': situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': situation.id}) }}"><p class="normal-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                {% else %}
+                    {% if situation.score is defined and situation.score.declarationsListP2|length > 0 and situation.stack|length > 0 %}
+                        <li class="normal-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="normal-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if situation.trickPlayer|length + situation.trickComputer|length > 0 and situation.stack|length > 0 %}
+                        <li class="normal-screen__list-element LastTrick last-trick trick"><p class="normal-screen__inside-list-element">Dernier pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="normal-screen__list-element" href="{{path('app_rules')}}"><p class="normal-screen__inside-list-element">Règles</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="normal-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="narrow-screen__icon normal-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="normal-screen__list-element" href="{{path('app_login')}}"><p class="normal-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% else %}
+                {% if app.user %}
+                    <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_user_init', {'id': app.user.id}) }}"><p class="normal-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% else %}
+                    <a class="normal-screen__list-element stopHistoryRegister" href="{{ path('game_init') }}"><p class="normal-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="normal-screen__list-element" href="{{path('app_rules')}}"><p class="normal-screen__inside-list-element">Règles</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="normal-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="normal-screen__icon normal-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="normal-screen__list-element" href="{{path('app_login')}}"><p class="normal-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% endif %}
+		    <li class="burger burgerGame normal-screen__burger normal-screen__list-element"><p class="normal-screen__inside-list-element">Menu</p></li>
+        </ul>
+	</div>
+	<div class="wide-screen">
+		<ul class="wide-screen__navbar-list">
+		    {% if '/home' in currentPath == false %}
+		        <a href="{{ path('app_home') }}" class="wide-screen__home"><p class="wide-screen__inside-list-element">Accueil</p></a>
+            {% endif %}
+            {% if app.user and app.user.situation %}
+                {% if '/game/' in currentPath == false %}
+                    {% if app.user.situation.stage == 'trickGameResult' %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', {'id': app.user.situation.id}) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and (app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', {'id': app.user.situation.id}) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif app.user.situation.stage == 'showResultGame' and ((app.user.situation.score.player1|length < 1000 and app.user.situation.score.player2 < 1000) == false) %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_restart', {'id': app.user.situation.id}) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', {'id': app.user.situation.id}) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                {% else %}
+                    {% if app.user.situation.score.declarationsListP2|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="wide-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="wide-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if app.user.situation.trickPlayer|length + app.user.situation.trickComputer|length > 0 and app.user.situation.stack|length > 0 %}
+                        <li class="wide-screen__list-element LastTrick last-trick trick"><p class="wide-screen__inside-list-element">Dernier pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="wide-screen__list-element" href="{{ path('app_rules') }}"><p class="wide-screen__inside-list-element">Règles du jeu</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false %}
+                    <a class="wide-screen__list-element" href="{{ path('app_myAccount', {'id': app.user.id}) }}"><img src={{ app.user.avatar }} alt="user icon" class="wide-screen__icon wide-screen__inside-list-element"></a>
+                {% endif %}
+            {% elseif situation is defined %}
+                {% if '/game/' in currentPath == false %}
+                    {% if situation.stage == 'trickGameResult' %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_playSecond', { 'id': situation.id }) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and (situation.score.player1|length < 1000 and situation.score.player2 < 1000) %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_endRound', { 'id': situation.id }) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% elseif situation.stage == 'showResultGame' and ((situation.score.player1|length < 1000 and situation.score.player2 < 1000) == false) %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_restart', { 'id': situation.id }) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% else %}
+                        <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_playerWonTrick', { 'id': situation.id }) }}"><p class="wide-screen__inside-list-element">Jeu</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                    {% endif %}
+                {% else %}
+                    {% if situation.score is defined and situation.score.declarationsListP2|length > 0 and situation.stack|length > 0 %}
+                        <li class="wide-screen__list-element ComputerCardsDeclarations computer-cards-declarations declared"><p class="wide-screen__inside-list-element">Ordinateur</p></li>
+                    {% endif %}
+                    {% if situation.trickPlayer|length + situation.trickComputer|length > 0 and situation.stack|length > 0 %}
+                        <li class="wide-screen__list-element LastTrick last-trick trick"><p class="wide-screen__inside-list-element">Dernier pli</p></li>
+                    {% endif %}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="wide-screen__list-element" href="{{ path('app_rules') }}"><p class="wide-screen__inside-list-element">Règles du jeu</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="wide-screen__list-element" href="{{ path('app_myAccount', {'id': app.user.id}) }}"><img src={{ app.user.avatar }} alt="user icon" class="wide-screen__icon wide-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="wide-screen__list-element" href="{{path('app_login')}}"><p class="wide-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% else %}
+                {% if app.user %}
+                    <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_user_init', {'id': app.user.id}) }}"><p class="wide-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% else %}
+                    <a class="wide-screen__list-element stopHistoryRegister" href="{{ path('game_init') }}"><p class="wide-screen__inside-list-element">Jouer</p></a> {# stopHistoryRegister is a js class for clearHistory.js.#}
+                {% endif %}
+                {% if '/rules' in currentPath == false %}
+                    <a class="wide-screen__list-element" href="{{path('app_rules')}}"><p class="wide-screen__inside-list-element">Règles du jeu</p></a>
+                {% endif %}
+                {% if '/MyAccount/' in currentPath == false and app.user %}
+                    <a class="wide-screen__list-element" href="{{path('app_myAccount', {'id': app.user.id})}}"><img src={{ app.user.avatar }} alt="user icon" class="wide-screen__icon wide-screen__inside-list-element"></a>
+                {% elseif '/MyAccount/' in currentPath %}
+                {% else %}
+                    <a class="wide-screen__list-element" href="{{path('app_login')}}"><p class="wide-screen__inside-list-element">connection</p></a>
+                {% endif %}
+            {% endif %}
+		    <li class="burger burgerGame wide-screen__burger wide-screen__list-element"><p class="wide-screen__inside-list-element">Menu</p></li>
+        </ul>
+	</div>
+</nav>
